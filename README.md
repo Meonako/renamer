@@ -4,7 +4,7 @@ Batch files renamer (rename multiple files name simutenously)
 
 # What's this for?
 
-Maybe not for any normal user but `Textual Inversion Embedding` trainer who will, most likely, find themselves struggle to rename all the result files
+- [`Textual Inversion Embedding`](https://huggingface.co/docs/diffusers/training/text_inversion) trainer who will, most likely, find themselves struggle to rename all the result files
 > Take a look at the [demo](https://github.com/Meonako/renamer#demo) section
 
 # Usage
