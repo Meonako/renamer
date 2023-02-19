@@ -1,6 +1,18 @@
 # Renamer
 
-Rough batch files renamer (cuz I'm hurry to get this thing done ASAP)
+Batch files renamer (rename multiple files name simutenously)
+
+# What's this for?
+
+Maybe not for any normal user but `Textual Invertion Embedding` trainer who will, most likely, find themselves struggle to rename all the result files
+> Take a look at the [demo](https://github.com/Meonako/renamer/edit/master/README.md#demo) section
+
+# Usage
+
+1. Run the executable
+2. Enter the target directory
+3. Enter the text you want it to disappear from your life (jk)
+4. Enter the text you want to see as a result
 
 # Demo
 
