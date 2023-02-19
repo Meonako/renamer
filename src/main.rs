@@ -1,10 +1,10 @@
-mod utils;
 mod default;
+mod utils;
 
 use std::{fs, io};
 
-use utils::{receive_directory_path, receive_text_to_replace, receive_replace_text, print, input};
 use default::*;
+use utils::*;
 
 fn main() {
     let dir_to_read = receive_directory_path();
@@ -15,15 +15,31 @@ fn main() {
 
     loop {
         println!("Are you sure you want to do this? (y/n)");
-        println!("Replace \"{}\" with \"{}\" {}", text_to_replace, replace_with, if replace_with == "" { "[EMPTY] aka REMOVED FROM FILE NAME" } else { "" });
-        println!("In Directory: {}", if dir_to_read == DEFAULT_DIR { "Current Directory" } else { &dir_to_read });
+        println!(
+            "Replace \"{}\" with \"{}\" {}",
+            text_to_replace,
+            replace_with,
+            if replace_with == "" {
+                "[EMPTY] aka REMOVED FROM FILE NAME"
+            } else {
+                ""
+            }
+        );
+        println!(
+            "In Directory: {}",
+            if dir_to_read == DEFAULT_DIR {
+                "Current Directory"
+            } else {
+                &dir_to_read
+            }
+        );
         print("Your choice: ");
         let answer = input();
 
         match answer.to_lowercase().trim() {
-            "y" | "yes"  => break,
+            "y" | "yes" => break,
             "n" | "no" | "q" | "quit" => return,
-            _ => continue
+            _ => continue,
         }
     }
 
@@ -43,11 +59,14 @@ fn main() {
 
         if filename.contains(&text_to_replace) {
             let new_filename = filename.replace(&text_to_replace, &replace_with);
+
             println!("Renaming: {} to {}", filename, new_filename);
+
             full_path.set_file_name(new_filename);
             if let Err(e) = fs::rename(old_path, full_path) {
                 println!("{}", e)
             }
+
             renamed += 1;
         }
     }
@@ -58,4 +77,3 @@ fn main() {
     print("\nPress enter to continue...");
     io::stdin().read_line(&mut hold).unwrap();
 }
-

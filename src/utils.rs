@@ -5,7 +5,7 @@ use crate::default::*;
 pub fn input() -> String {
     let mut str = String::new();
     io::stdin().read_line(&mut str).expect("to read input");
-    return str.trim().to_owned()
+    return str.trim().to_owned();
 }
 
 pub fn print(msg: &str) {
@@ -30,7 +30,9 @@ pub fn receive_directory_path() -> String {
 }
 
 pub fn receive_text_to_replace() -> String {
-    print(&format!("Enter text-to-replace ( {DEFAULT_TEXT_TO_REPLACE} ): "));
+    print(&format!(
+        "Enter text-to-replace ( {DEFAULT_TEXT_TO_REPLACE} ): "
+    ));
 
     let str = input();
     value_or_default(str, DEFAULT_TEXT_TO_REPLACE)
