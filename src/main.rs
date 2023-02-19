@@ -9,13 +9,13 @@ use default::*;
 fn main() {
     let dir_to_read = receive_directory_path();
     let text_to_replace = receive_text_to_replace();
-    let replace_with = receive_replace_text();
+    let replace_with = receive_replace_text(&text_to_replace);
 
     println!("--------------------------------------------------");
 
     loop {
         println!("Are you sure you want to do this? (y/n)");
-        println!("Replace \"{}\" with \"{}\"", text_to_replace, replace_with);
+        println!("Replace \"{}\" with \"{}\" {}", text_to_replace, replace_with, if replace_with == "" { "[EMPTY] aka REMOVED FROM FILE NAME" } else { "" });
         println!("In Directory: {}", if dir_to_read == DEFAULT_DIR { "Current Directory" } else { &dir_to_read });
         print("Your choice: ");
         let answer = input();

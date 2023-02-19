@@ -21,22 +21,24 @@ pub fn value_or_default(mut str: String, default_value: &str) -> String {
 }
 
 pub fn receive_directory_path() -> String {
-    print("Directory Path: ");
+    let wd = std::env::current_dir().expect("access to current directory");
+
+    print(&format!("Directory Path ( {} ): ", wd.to_str().unwrap()));
 
     let str = input();
     value_or_default(str, DEFAULT_DIR)
 }
 
 pub fn receive_text_to_replace() -> String {
-    print("Enter text-to-replace: ");
+    print(&format!("Enter text-to-replace ( {DEFAULT_TEXT_TO_REPLACE} ): "));
 
     let str = input();
     value_or_default(str, DEFAULT_TEXT_TO_REPLACE)
 }
 
-pub fn receive_replace_text() -> String {
-    print("Replace that text with: ");
+pub fn receive_replace_text(original: &str) -> String {
+    print(&format!("Replace \"{}\" with ( \"\" [EMPTY] ): ", original));
 
     let str = input();
-    value_or_default(str, "new-name")
+    str.trim().to_owned()
 }
