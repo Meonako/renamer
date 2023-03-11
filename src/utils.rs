@@ -13,11 +13,11 @@ pub fn print(msg: &str) {
     io::stdout().flush().unwrap();
 }
 
-pub fn wait_and_exit() {
+pub fn wait_and_exit(code: i32) {
     let mut hold = String::new();
     print("\nPress enter to continue...");
     io::stdin().read_line(&mut hold).unwrap();
-    exit(1)
+    exit(code)
 }
 
 pub fn value_or_default(mut str: String, default_value: &str) -> String {

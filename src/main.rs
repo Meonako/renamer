@@ -43,7 +43,7 @@ fn main() {
 
     if !dir.exists() {
         print(&format!("Directory \'{dir_to_read}\' not found!"));
-        wait_and_exit();
+        wait_and_exit(1);
     }
 
     loop {
@@ -106,5 +106,5 @@ fn main() {
 
     println!("Renamed: {} file(s)", renamed);
 
-    wait_and_exit();
+    wait_and_exit(0);
 }
