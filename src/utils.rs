@@ -1,4 +1,4 @@
-use std::{io, io::Write};
+use std::{io, io::Write, process::exit};
 
 use crate::default::*;
 
@@ -11,6 +11,13 @@ pub fn input() -> String {
 pub fn print(msg: &str) {
     print!("{}", msg);
     io::stdout().flush().unwrap();
+}
+
+pub fn wait_and_exit() {
+    let mut hold = String::new();
+    print("\nPress enter to continue...");
+    io::stdin().read_line(&mut hold).unwrap();
+    exit(1)
 }
 
 pub fn value_or_default(mut str: String, default_value: &str) -> String {

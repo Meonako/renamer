@@ -1,17 +1,50 @@
+mod args;
 mod default;
 mod utils;
 
-use std::{fs, io};
+use std::fs;
 
+use clap::Parser;
+
+use args::*;
 use default::*;
 use utils::*;
 
 fn main() {
-    let dir_to_read = receive_directory_path();
-    let text_to_replace = receive_text_to_replace();
-    let replace_with = receive_replace_text(&text_to_replace);
+    let arguments = Arguments::parse();
+
+    let dir_to_read = if arguments.dir_to_read.is_some() {
+        arguments.dir_to_read.unwrap()
+    } else if arguments.dir_to_read_pos.is_some() {
+        arguments.dir_to_read_pos.unwrap()
+    } else {
+        receive_directory_path()
+    };
+
+    let text_to_replace = if arguments.text_to_replace.is_some() {
+        arguments.text_to_replace.unwrap()
+    } else if arguments.text_to_replace_pos.is_some() {
+        arguments.text_to_replace_pos.unwrap()
+    } else {
+        receive_text_to_replace()
+    };
+
+    let replace_with = if arguments.replace_with.is_some() {
+        arguments.replace_with.unwrap()
+    } else if arguments.replace_with_pos.is_some() {
+        arguments.replace_with_pos.unwrap()
+    } else {
+        receive_replace_text(&text_to_replace)
+    };
 
     println!("--------------------------------------------------");
+
+    let dir = std::path::Path::new(&dir_to_read);
+
+    if !dir.exists() {
+        print(&format!("Directory \'{dir_to_read}\' not found!"));
+        wait_and_exit();
+    }
 
     loop {
         println!("Are you sure you want to do this? (y/n)");
@@ -43,7 +76,7 @@ fn main() {
         }
     }
 
-    let paths = fs::read_dir(dir_to_read).expect("read directory");
+    let paths = fs::read_dir(dir).expect("read directory");
 
     println!("--------------------------------------------------");
 
@@ -73,7 +106,5 @@ fn main() {
 
     println!("Renamed: {} file(s)", renamed);
 
-    let mut hold = String::new();
-    print("\nPress enter to continue...");
-    io::stdin().read_line(&mut hold).unwrap();
+    wait_and_exit();
 }
