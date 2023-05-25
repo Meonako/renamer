@@ -1,4 +1,4 @@
-# Renamer
+# Renamer (Use PowerRename and ignore this plz)
 
 Batch files renamer (rename multiple files name simutenously)
 
